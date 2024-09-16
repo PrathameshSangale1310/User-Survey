@@ -4,76 +4,65 @@ import Question from './Question';
 
 const Qna = ({ questions }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [answers, setAnswers] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const navigate = useNavigate();
 
+  const handleAnswerChange = (questionId, answer) => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionId]: answer,
+    }));
+    localStorage.setItem(questionId, answer);
+  };
+  
   const handleNext = () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
   };
-
+  
   const handlePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     }
   };
-
+  
   const handleSubmit = () => {
     setShowModal(true);
   };
-
+  
   const handleCloseModalYes = () => {
     setShowModal(false);
     setShowThankYou(true);
     setTimeout(() => {
-      navigate('/welcome');
+      navigate('/');
     }, 5000);
   };
-
+  
   const handleCloseModalNo = () => {
     setShowModal(false);
   };
-
+  
   const currentQuestion = questions[currentIndex];
 
   return (
     <div className="container my-3" style={{ paddingTop: "150px", paddingBottom: "150px", color: "white" }}>
       {showThankYou ? (
         <div style={{ textAlign: 'center', paddingTop: '50px' }}>
-          <h2>Thank you for your time. Your response has been recorded!</h2>
+          <h2>Thank you for your submission!</h2>
         </div>
       ) : (
         <>
-          <Question key={currentQuestion.id} question={currentQuestion} index={currentIndex} />
+          <Question key={currentQuestion.id} question={currentQuestion} index={currentIndex} onAnswerChange={(answer) => handleAnswerChange(currentQuestion.id, answer)} />
           <div className='d-flex mt-3' style={{ paddingLeft: "225px", gap: "525px", paddingBottom: "50px" }}>
-            <button
-              type="button"
-              disabled={currentIndex === 0}
-              onClick={handlePrev}
-              className="btn btn-light"
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              disabled={currentIndex === questions.length - 1}
-              onClick={handleNext}
-              className="btn btn-light"
-            >
-              Next
-            </button>
+            <button type="button" disabled={currentIndex === 0} onClick={handlePrev} className="btn btn-light">Previous</button>
+            <button type="button" disabled={currentIndex === questions.length - 1} onClick={handleNext} className="btn btn-light">Next</button>
           </div>
           {currentIndex === questions.length - 1 && (
             <div style={{ paddingLeft: "820px" }}>
-              <button
-                type="button"
-                className="btn btn-light"
-                onClick={handleSubmit}
-              >
-                Submit
-              </button>
+              <button type="button" className="btn btn-light" onClick={handleSubmit}>Submit</button>
             </div>
           )}
           {showModal && (
