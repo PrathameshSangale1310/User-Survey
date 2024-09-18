@@ -37,7 +37,7 @@ const Qna = ({ questions }) => {
     setShowModal(false);
     setShowThankYou(true);
     setTimeout(() => {
-      navigate('/');
+      navigate('/welcome');
     }, 5000);
   };
   

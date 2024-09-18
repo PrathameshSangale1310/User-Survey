@@ -33,11 +33,7 @@ const Question = ({ question, index }) => {
       <h1 style={{paddingBottom:"15px"}}><center>Customer Survey</center></h1>
       <h5 style={{textAlign:"right", paddingRight:"225px"}}> Question {index+1}/{questions.length}</h5>
       <div className="top-left" style={{ position: 'absolute', top: '20px', left: '20px', display: 'flex', alignItems: 'center' }}>
-        <img
-          src="https://www.shareicon.net/data/512x512/2016/02/07/281223_cart_512x512.png"
-          alt="GemGlow Logo"
-          style={{ height: '50px', marginRight: '10px' }}
-        />
+        <img src="https://www.shareicon.net/data/512x512/2016/02/07/281223_cart_512x512.png" alt="GemGlow Logo" style={{ height: '50px', marginRight: '10px' }} />
         <strong style={{ fontSize: '24px' }}>GemGlow Store</strong>
       </div>
 
@@ -48,30 +44,11 @@ const Question = ({ question, index }) => {
 
         {question.type === 'rating' ? (
           <>
-            <input
-              type="number"
-              className="form-control"
-              id={`question-${question.id}`}
-              min="1"
-              max={question.scale}
-              value={answer}
-              onChange={handleInputChange}
-              placeholder={`Rate from 1 to ${question.scale}`}
-              style={{ border: "1px solid black" }}
-            />
-            {warning && (
-              <small style={{ color: "red" }}>{warning}</small>
-            )}
+            <input type="number" className="form-control" id={`question-${question.id}`} min="1" max={question.scale} value={answer} onChange={handleInputChange} placeholder={`Rate from 1 to ${question.scale}`} style={{ border: "1px solid black" }} />
+            {warning && (<small style={{ color: "red" }}>{warning}</small>)}
           </>
         ) : (
-          <textarea
-            className="form-control"
-            id={`question-${question.id}`}
-            rows="3"
-            value={answer}
-            onChange={handleInputChange}
-            placeholder="Enter your response here"
-          ></textarea>
+          <textarea className="form-control" id={`question-${question.id}`} rows="3" value={answer} onChange={handleInputChange} placeholder="Enter your response here"></textarea>
         )}
       </div>
     </>

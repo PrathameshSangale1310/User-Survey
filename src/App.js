@@ -11,14 +11,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={!surveyStarted ? <Welcome onStart={() => setSurveyStarted(true)} /> : <Qna questions={questions} />}
-        />
-        <Route
-          path="/welcome"
-          element={<Welcome onStart={() => setSurveyStarted(true)} />}
-        />
+        <Route path="/" element={!surveyStarted ? <Welcome onStart={() => setSurveyStarted(true)} /> : <Qna questions={questions} />} />
+        <Route path="/welcome" element={<Welcome onStart={() => setSurveyStarted(true)} />} />
       </Routes>
     </Router>
   );
